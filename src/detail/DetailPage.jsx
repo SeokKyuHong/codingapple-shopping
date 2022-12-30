@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import FillExample from './FillExample';
 
 const DetailPage = (props) => {
     let {id} = useParams();
@@ -44,11 +45,12 @@ const DetailPage = (props) => {
 
                 {/* 수량 입력 */}
                 <input onChange={(e)=>{ setNum(e.target.value) }}/>
-
                 <p>{findYeji.price}원</p>
+                
                 <button className="btn btn-danger">구매하기</button> 
             </div>
         </div>
+        <FillExample/>
     </div> 
   );
 }

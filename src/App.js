@@ -11,6 +11,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import axios from 'axios';
+import Cart from './detail/Cart.js';
 
 styled.button`
   background : yellow;
@@ -55,7 +56,10 @@ function App() {
 
         {/* 상세페이지 라우팅 */}
         <Route path="/detail/:id" element={
+          <>
           <DetailPage yeji={ yeji }/>  
+
+          </>
         } />
         
         {/* About 라우팅 */}
@@ -63,6 +67,9 @@ function App() {
           <Route path="member" element={ <h2>member</h2> }></Route>
           <Route path="map" element={ <h2>map</h2> }></Route>
         </Route>
+        {/* <Route path="/cart" element={ <Cart></Cart> }>
+
+        </Route> */}
       </Routes>
 
       <div className='listPush'>
@@ -70,15 +77,16 @@ function App() {
           axios.get('https://codingapple1.github.io/shop/data2.json')
           .then((result)=>{
             let yeji_copy = [...yeji, ...result.data];
-            console.log(yeji_copy);
             setYeji(yeji_copy);
           })
           .catch(()=>{
             console.log('실패염');
           })
+
+          axios.post('/create')
         }}>버툰</Button>
       </div>
-
+      
     </div>
   );
 }
