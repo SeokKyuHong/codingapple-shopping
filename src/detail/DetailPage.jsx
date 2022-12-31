@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import FillExample from './FillExample';
+import { addItem } from '../store';
+import { useDispatch } from 'react-redux';
 
 const DetailPage = (props) => {
     let {id} = useParams();
     let findYeji = props.yeji.find( (x)=> x.id == id );
     let [topAlert, setAlert] = useState(true);
     let [num, setNum] = useState('');
+    let dispatch = useDispatch();
 
     useEffect( ()=> {
         let a = setTimeout( ()=> {
@@ -47,9 +50,13 @@ const DetailPage = (props) => {
                 <input onChange={(e)=>{ setNum(e.target.value) }}/>
                 <p>{findYeji.price}원</p>
                 
-                <button className="btn btn-danger">구매하기</button> 
+                <button className="btn btn-danger" onClick={()=>{
+                    dispatch(addItem({}))
+                }}>구매하기</button> 
             </div>
         </div>
+
+        {/* 상세페이지 탭메뉴 */}
         <FillExample/>
     </div> 
   );

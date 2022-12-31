@@ -12,9 +12,11 @@ import styled from 'styled-components';
 
 import axios from 'axios';
 
+// import DrawingProgram from './live/DrawingProgram';
 import Whiteboard from './live/Whiteboard';
 import TestOverlay from './live/TestOverlay';
 import { useNavigate } from "react-router-dom"
+import Cart from './detail/Cart';
 
 styled.button`
   background : yellow;
@@ -70,7 +72,6 @@ function App() {
                   console.log('실패염');
                 })
 
-                axios.post('/create')
               }}>더보기</Button>
             </div>
           </>
@@ -89,7 +90,7 @@ function App() {
           <>
             <Whiteboard/>
             <TestOverlay/>  
-
+            {/* <DrawingProgram/> */}
           </>
         } />
         
@@ -98,9 +99,10 @@ function App() {
           <Route path="member" element={ <h2>member</h2> }></Route>
           <Route path="map" element={ <h2>map</h2> }></Route>
         </Route>
-        {/* <Route path="/cart" element={ <Cart></Cart> }>
 
-        </Route> */}
+        {/* Cart 라우팅 */}
+        <Route path="/cart" element={ <Cart/> }>
+        </Route>
       </Routes>
 
       
