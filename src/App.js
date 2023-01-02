@@ -7,16 +7,18 @@ import ResponsiveAutoExample from "./bootstrap/ResponsiveAutoExample.jsx"
 import { Routes, Route, Outlet } from "react-router-dom"
 import DetailPage from './detail/DetailPage.jsx';
 import data from './db/yejidata.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query' 
 
 // import DrawingProgram from './live/DrawingProgram';
 import Whiteboard from './live/Whiteboard';
 import TestOverlay from './live/TestOverlay';
 import { useNavigate } from "react-router-dom"
 import Cart from './detail/Cart';
+
 
 styled.button`
   background : yellow;
@@ -26,10 +28,24 @@ styled.button`
 function App() {
   let [yeji, setYeji] = useState(data);
   let navigate = useNavigate();
+  let a = localStorage.getItem('watched');
+  let arr = JSON.parse(a);
+
+  //처음 들어왔을떄 실행 할 것
+  // useEffect(()=> {
+  //   if (localStorage.getItem('watched') == null){
+  //     localStorage.setItem('watched', JSON.stringify([]));
+  //   }
+  // }, [])
+
+
+
+
   return (
     <div className="App">
-      <CollapsibleExample/>
-      
+
+        <CollapsibleExample/>
+
       <Routes> 
         {/* 404 Error케이스 */}
         <Route path="*" element={
@@ -42,6 +58,22 @@ function App() {
         <Route path="/" element={
           <>
             {/* 메인 베너  */}
+
+            {/* 최근 본 상품 리스트(화면 우측에 진열) */}
+            {/* <div className='recently'>
+              <h3>최근 본 상품</h3>
+              {
+                arr != null ?
+                  arr.map((b, i)=>{
+                    return (
+                      <div key={i}>
+                      <img style={{width: "50%", textAlign: "center"}} alt='예지' src={ require('./img/yeji_0'+ yeji[b].id +'.jpg') }/>
+                      </div>
+                    )
+                  }) : null
+              }
+            </div> */}
+
             <div className='back-bg'>
               <div className='main-bg'></div>
             </div>

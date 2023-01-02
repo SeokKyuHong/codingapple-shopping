@@ -11,6 +11,17 @@ const DetailPage = (props) => {
     let [num, setNum] = useState('');
     let dispatch = useDispatch();
 
+    useEffect(()=>{
+        
+        let data = localStorage.getItem('watched');
+        data = JSON.parse(data);
+
+        if (!(data.find( (x)=> x == findYeji.id))){
+            data.push(findYeji.id);
+        }
+        localStorage.setItem('watched', JSON.stringify(data));
+    }, [])
+
     useEffect( ()=> {
         let a = setTimeout( ()=> {
             setAlert(false);
@@ -23,7 +34,9 @@ const DetailPage = (props) => {
         if (isNaN(num) == true){
             alert('그러지마세요')
         }
-    }, [num])
+    }, [])
+
+    
 
     
   return (
